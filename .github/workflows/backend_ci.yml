@@ -31,6 +31,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend/product_service
+          file:    ./backend/product_service/Dockerfile
           push: true
           tags: |
             ${{ secrets.ACR_LOGIN_SERVER }}/product-service:latest
@@ -40,6 +41,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./backend/order_service
+          file:    ./backend/order_service/Dockerfile
           push: true
           tags: |
             ${{ secrets.ACR_LOGIN_SERVER }}/order-service:latest
@@ -49,6 +51,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
+          file:    ./frontend/Dockerfile
           push: true
           tags: |
             ${{ secrets.ACR_LOGIN_SERVER }}/frontend:latest
