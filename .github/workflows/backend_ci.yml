@@ -27,14 +27,23 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Build & push backend
+      - name: Build & push product-service
         uses: docker/build-push-action@v6
         with:
-          context: ./backend
+          context: ./backend/product_service
           push: true
           tags: |
-            ${{ secrets.ACR_LOGIN_SERVER }}/backend:latest
-            ${{ secrets.ACR_LOGIN_SERVER }}/backend:${{ github.sha }}
+            ${{ secrets.ACR_LOGIN_SERVER }}/product-service:latest
+            ${{ secrets.ACR_LOGIN_SERVER }}/product-service:${{ github.sha }}
+
+      - name: Build & push order-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend/order_service
+          push: true
+          tags: |
+            ${{ secrets.ACR_LOGIN_SERVER }}/order-service:latest
+            ${{ secrets.ACR_LOGIN_SERVER }}/order-service:${{ github.sha }}
 
       - name: Build & push frontend
         uses: docker/build-push-action@v6
